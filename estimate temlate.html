@@ -1,0 +1,1069 @@
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@600&display=swap');
+
+        * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0
+        }
+
+        :root {
+                --ink: #000000;
+                --ink2: #333333;
+                --ink3: #666666;
+                --surface: #ffffff;
+                --surface2: #f9f9f9;
+                --surface3: #f0f0f8;
+                --accent: #ee5566;
+                --accent2: #ff7788;
+                --gold: #b8860b;
+                --good: #1a7a4a;
+                --better: #1565c0;
+                --best: #6a1b9a;
+                --border: rgba(0, 0, 0, 0.1);
+                --border2: rgba(0, 0, 0, 0.06);
+                --radius: 10px;
+                --radiusLg: 16px;
+        }
+
+        body {
+                font-family: 'DM Sans', sans-serif;
+                color: var(--ink);
+                background: var(--surface2);
+                padding: 0
+        }
+
+        .doc {
+                max-width: 860px;
+                margin: 0 auto;
+                background: var(--surface);
+                min-height: 100vh
+        }
+
+        .header {
+                background: var(--ink);
+                padding: 2.5rem 3rem;
+                position: relative;
+                overflow: hidden
+        }
+
+        .header::before {
+                content: '';
+                position: absolute;
+                top: -40px;
+                right: -40px;
+                width: 200px;
+                height: 200px;
+                border-radius: 50%;
+                background: var(--accent);
+                opacity: 0.12
+        }
+
+        .header::after {
+                content: '';
+                position: absolute;
+                bottom: -60px;
+                right: 60px;
+                width: 120px;
+                height: 120px;
+                border-radius: 50%;
+                background: #fff;
+                opacity: 0.04
+        }
+
+        .header-inner {
+                display: flex;
+                justify-content: space-between;
+
+                position: relative;
+                z-index: 1
+        }
+
+        .brand {
+                display: flex;
+                align-items: center;
+                gap: 10px
+        }
+
+        .brand-logo {
+                width: 36px;
+                height: 36px;
+                background: var(--accent);
+                border-radius: 8px;
+                display: flex;
+                align-items: center;
+                justify-content: center
+        }
+
+        .brand-logo span {
+                color: #fff;
+                font-weight: 600;
+                font-size: 13px;
+                letter-spacing: -0.5px
+        }
+
+        .brand-name {
+                color: #fff;
+                font-size: 15px;
+                font-weight: 500;
+                letter-spacing: 0.5px
+        }
+
+        .brand-url {
+                color: rgba(255, 255, 255, 0.4);
+                font-size: 11px;
+                margin-top: 1px
+        }
+
+        .doc-title {
+                color: #fff;
+                font-family: 'Playfair Display', serif;
+                font-size: 28px;
+                font-weight: 600;
+                line-height: 1.2
+        }
+
+        .doc-subtitle {
+                color: rgba(255, 255, 255, 0.5);
+                font-size: 12px;
+                margin-top: 4px;
+                letter-spacing: 0.8px;
+                text-transform: uppercase
+        }
+
+        .accent-bar {
+                height: 4px;
+                background: linear-gradient(90deg, var(--accent) 0%, var(--accent2) 50%, transparent 100%)
+        }
+
+        .section {
+                padding: 2rem 3rem;
+                border-bottom: 1px solid var(--border2)
+        }
+
+        .section:last-child {
+                border-bottom: none
+        }
+
+        .sec-label {
+                font-size: 10px;
+                font-weight: 600;
+                letter-spacing: 1.5px;
+                text-transform: uppercase;
+                color: var(--accent);
+                margin-bottom: 1.2rem
+        }
+
+        .field-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 12px 24px
+        }
+
+        .field-grid.three {
+                grid-template-columns: 2fr 1fr 1fr
+        }
+
+        .field-full {
+                grid-column: 1/-1
+        }
+
+        .field {
+                display: flex;
+                flex-direction: column;
+                gap: 4px
+        }
+
+        .field label {
+                font-size: 11px;
+                font-weight: 500;
+                letter-spacing: 0.5px;
+                color: var(--ink3);
+                text-transform: uppercase
+        }
+
+        .field-line {
+                height: 40px;
+                border: 1px solid var(--border);
+                border-radius: var(--radius);
+                background: var(--surface2);
+                font-family: 'DM Sans', sans-serif;
+                font-size: 14px;
+                color: var(--ink);
+                outline: none;
+                width: 100%;
+                padding: 0 12px;
+                transition: border-color 0.2s, background 0.2s
+        }
+
+        .field-line:focus {
+                border-color: var(--accent);
+                background: #fff
+        }
+
+        textarea.field-line {
+                height: 80px;
+                resize: none;
+                padding: 10px 12px;
+                line-height: 1.5
+        }
+
+        .tier-cards {
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+                margin-top: 0.5rem
+        }
+
+        .tier-card {
+                border-radius: var(--radiusLg);
+                overflow: hidden;
+                border: 1.5px solid var(--border);
+                page-break-inside: avoid;
+        }
+
+        .tier-card.good .tier-head {
+                background: #e8f5ee;
+                border-bottom: 2px solid var(--good)
+        }
+
+        .tier-card.better .tier-head {
+                background: #e3efff;
+                border-bottom: 2px solid var(--better)
+        }
+
+        .tier-card.best .tier-head {
+                background: #f3e8ff;
+                border-bottom: 2px solid var(--best)
+        }
+
+        .tier-head {
+                padding: 12px 16px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between
+        }
+
+        .tier-tag {
+                font-size: 11px;
+                font-weight: 600;
+                letter-spacing: 1px;
+                text-transform: uppercase
+        }
+
+        .good .tier-tag {
+                color: var(--good)
+        }
+
+        .better .tier-tag {
+                color: var(--better)
+        }
+
+        .best .tier-tag {
+                color: var(--best)
+        }
+
+        .tier-badge {
+                font-size: 10px;
+                padding: 2px 8px;
+                border-radius: 20px;
+                font-weight: 500
+        }
+
+        .good .tier-badge {
+                background: var(--good);
+                color: #fff
+        }
+
+        .better .tier-badge {
+                background: var(--better);
+                color: #fff
+        }
+
+        .best .tier-badge {
+                background: var(--best);
+                color: #fff
+        }
+
+        .tier-body {
+                padding: 14px 16px;
+                background: var(--surface)
+        }
+
+        .tier-field {
+                margin-bottom: 12px
+        }
+
+        .tier-field label {
+                font-size: 10px;
+                font-weight: 500;
+                letter-spacing: 0.5px;
+                color: var(--ink3);
+                text-transform: uppercase;
+                display: block;
+                margin-bottom: 4px
+        }
+
+        .tier-field textarea {
+                width: 100%;
+                height: 72px;
+                resize: none;
+                border: 1px solid var(--border);
+                border-radius: 6px;
+                padding: 8px;
+                font-family: 'DM Sans', sans-serif;
+                font-size: 13px;
+                color: var(--ink);
+                background: var(--surface2);
+                outline: none
+        }
+
+        .tier-field textarea:focus {
+                border-color: var(--accent);
+                background: #fff
+        }
+
+        .tier-field input {
+                width: 100%;
+                height: 34px;
+                border: 1px solid var(--border);
+                border-radius: 6px;
+                padding: 0 8px;
+                font-family: 'DM Sans', sans-serif;
+                font-size: 13px;
+                color: var(--ink);
+                background: var(--surface2);
+                outline: none
+        }
+
+        .tier-field input:focus {
+                border-color: var(--accent);
+                background: #fff
+        }
+
+        .cost-table {
+                width: 100%;
+                border-collapse: separate;
+                border-spacing: 0;
+                margin-top: 0.5rem;
+                border: 1.5px solid var(--border);
+                border-radius: var(--radiusLg);
+                overflow: hidden;
+                page-break-inside: avoid;
+        }
+
+        .cost-table th {
+                background: var(--ink);
+                color: #fff;
+                font-size: 11px;
+                font-weight: 500;
+                letter-spacing: 0.8px;
+                text-transform: uppercase;
+                padding: 12px 14px;
+                text-align: left;
+                border-bottom: 1px solid var(--border);
+                border-right: 1px solid var(--border);
+        }
+
+        .cost-table th:last-child {
+                border-right: none;
+        }
+
+        .cost-table tr {
+                page-break-inside: avoid;
+        }
+
+        .cost-table .sub-head td {
+                background: var(--surface3);
+                font-size: 11px;
+                font-weight: 600;
+                letter-spacing: 1px;
+                text-transform: uppercase;
+                padding: 8px 14px;
+                color: var(--ink2);
+                border-bottom: 1px solid var(--border);
+                border-right: 1px solid var(--border);
+        }
+
+        .cost-table .sub-head.good-sub td:first-child {
+                border-left: 3px solid var(--good)
+        }
+
+        .cost-table .sub-head.better-sub td:first-child {
+                border-left: 3px solid var(--better)
+        }
+
+        .cost-table .sub-head.best-sub td:first-child {
+                border-left: 3px solid var(--best)
+        }
+
+        .cost-table td {
+                padding: 12px 14px;
+                border-bottom: 1px solid var(--border);
+                border-right: 1px solid var(--border);
+                font-size: 13px
+        }
+
+        .cost-table td:last-child {
+                border-right: none;
+        }
+
+        .cost-table tr:last-child td {
+                border-bottom: none;
+        }
+
+        .cost-table td input {
+                border: none;
+                background: transparent;
+                font-family: 'DM Sans', sans-serif;
+                font-size: 13px;
+                color: var(--ink);
+                width: 100%;
+                outline: none
+        }
+
+        .cost-table td input:focus {
+                background: var(--surface2);
+                border-radius: 4px;
+                padding: 2px 4px
+        }
+
+        .cost-table tr:hover td {
+                background: var(--surface2)
+        }
+
+        .cost-table tr:hover td input {
+                background: var(--surface2)
+        }
+
+        .col-label {
+                color: var(--ink2);
+                font-size: 13px
+        }
+
+        .col-good {
+                color: var(--good);
+                font-weight: 500
+        }
+
+        .col-better {
+                color: var(--better);
+                font-weight: 500
+        }
+
+        .col-best {
+                color: var(--best);
+                font-weight: 500
+        }
+
+        .total-row td {
+                background: var(--ink) !important;
+                color: #fff !important;
+                font-weight: 500;
+                font-size: 13px;
+                padding: 10px 14px
+        }
+
+        .total-row td input {
+                color: #fff !important;
+                background: transparent
+        }
+
+        .pay-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 12px 24px
+        }
+
+        .pay-grid.three {
+                grid-template-columns: 1fr 1fr 1fr
+        }
+
+        .payment-methods {
+                display: flex;
+                gap: 10px;
+                flex-wrap: wrap;
+                margin: 4px 0
+        }
+
+        .pay-method {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                cursor: pointer
+        }
+
+        .pay-method input[type=checkbox] {
+                width: 16px;
+                height: 16px;
+                accent-color: var(--accent);
+                cursor: pointer
+        }
+
+        .pay-method span {
+                font-size: 13px;
+                color: var(--ink2)
+        }
+
+        .terms-box {
+                width: 100%;
+                height: 90px;
+                resize: none;
+                border: 1px solid var(--border);
+                border-radius: var(--radius);
+                padding: 12px;
+                font-family: 'DM Sans', sans-serif;
+                font-size: 14px;
+                color: var(--ink);
+                background: var(--surface2);
+                outline: none;
+                line-height: 1.6
+        }
+
+        .terms-box:focus {
+                border-color: var(--accent);
+                background: #fff
+        }
+
+        .sig-row {
+                display: grid;
+                grid-template-columns: 1fr 1.5fr 1fr;
+                gap: 20px;
+                margin-top: 1.5rem
+        }
+
+        .sig-block {
+                display: flex;
+                flex-direction: column;
+                gap: 4px
+        }
+
+        .sig-line {
+                height: 40px;
+                border: 1px solid var(--border);
+                border-radius: var(--radius);
+                background: var(--surface2);
+                font-family: 'DM Sans', sans-serif;
+                font-size: 14px;
+                color: var(--ink);
+                outline: none;
+                width: 100%;
+                padding: 0 12px;
+                transition: border-color 0.2s, background 0.2s
+        }
+
+        .sig-line:focus {
+                border-color: var(--accent);
+                background: #fff
+        }
+
+        .sig-label {
+                font-size: 10px;
+                color: var(--ink3);
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                margin-top: 4px
+        }
+
+        .legal {
+                background: var(--ink);
+                color: rgba(255, 255, 255, 0.5);
+                font-size: 11px;
+                line-height: 1.7;
+                padding: 1.5rem 3rem;
+                text-align: justify;
+                page-break-inside: avoid;
+        }
+
+        .amount-row {
+                display: flex;
+                align-items: center;
+                gap: 8px
+        }
+
+        .currency {
+                font-size: 14px;
+                color: var(--ink3);
+                font-weight: 500
+        }
+
+        .amount-input {
+                flex: 1;
+                height: 40px;
+                border: 1px solid var(--border);
+                border-radius: var(--radius);
+                background: var(--surface2);
+                font-family: 'DM Sans', sans-serif;
+                font-size: 14px;
+                color: var(--ink);
+                outline: none;
+                padding: 0 12px;
+                transition: border-color 0.2s, background 0.2s
+        }
+
+        .amount-input:focus {
+                border-color: var(--accent);
+                background: #fff
+        }
+
+        .divider {
+                height: 1px;
+                background: var(--border2);
+                margin: 0
+        }
+
+        @media print {
+                body {
+                        background: #fff
+                }
+
+                .doc {
+                        box-shadow: none
+                }
+
+                input,
+                textarea {
+                        border-color: #ccc !important
+                }
+        }
+</style>
+
+<div class="doc">
+
+        <div class="header">
+                <div class="header-inner">
+                        <div class="brand">
+                                <img src="data:image/png;base64,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"
+                                        alt="ZenTrades" style="height: 28px; width: auto;">
+                                <div>
+                                </div>
+                        </div>
+                        <div style="text-align:right">
+                                <div class="doc-title">Electrician Inspection</div>
+                                <div class="doc-subtitle">Template</div>
+                        </div>
+                </div>
+        </div>
+
+        <div class="accent-bar"></div>
+
+        <div class="section">
+                <div class="sec-label">Job Site Information</div>
+                <div class="field-grid three">
+                        <div class="field field-full" style="grid-column:1/-1">
+                                <label>Site Name</label>
+                                <input class="field-line" type="text">
+                        </div>
+                        <div class="field field-full" style="grid-column:1/-1">
+                                <label>Site Address</label>
+                                <input class="field-line" type="text">
+                        </div>
+                        <div class="field">
+                                <label>Inspector Name</label>
+                                <input class="field-line" type="text">
+                        </div>
+                        <div class="field" style="grid-column: span 2">
+                                <label>Date of Inspection</label>
+                                <input class="field-line" type="text">
+                        </div>
+                </div>
+        </div>
+
+        <div class="section">
+                <table class="cost-table">
+                        <thead>
+                                <tr>
+                                        <th style="width: 10%">Clause</th>
+                                        <th style="width: 70%">Requirement</th>
+                                        <th style="width: 10%; text-align: center;">Yes</th>
+                                        <th style="width: 10%; text-align: center;">No</th>
+                                </tr>
+                        </thead>
+                        <tbody>
+                                <tr>
+                                        <td class="col-label">1.2</td>
+                                        <td>All wiring installed according to AS3000 Wiring rules in addition to AS3012
+                                                requirements.</td>
+                                        <td style="text-align: center;"><input type="checkbox"
+                                                        style="width:16px;height:16px;accent-color:var(--accent);"></td>
+                                        <td style="text-align: center;"><input type="checkbox"
+                                                        style="width:16px;height:16px;accent-color:var(--accent);"></td>
+                                </tr>
+                                <tr>
+                                        <td class="col-label">2.1.2</td>
+                                        <td>All electrical equipment and lighting are supplied from a 30mA RCD protected
+                                                circuit.</td>
+                                        <td style="text-align: center;"><input type="checkbox"
+                                                        style="width:16px;height:16px;accent-color:var(--accent);"></td>
+                                        <td style="text-align: center;"><input type="checkbox"
+                                                        style="width:16px;height:16px;accent-color:var(--accent);"></td>
+                                </tr>
+                                <tr>
+                                        <td class="col-label">2.1.3</td>
+                                        <td>Source of supply identified.</td>
+                                        <td style="text-align: center;"><input type="checkbox"
+                                                        style="width:16px;height:16px;accent-color:var(--accent);"></td>
+                                        <td style="text-align: center;"><input type="checkbox"
+                                                        style="width:16px;height:16px;accent-color:var(--accent);"></td>
+                                </tr>
+                                <tr>
+                                        <td class="col-label">2.3.1.1</td>
+                                        <td>Switchboard readily accessible.</td>
+                                        <td style="text-align: center;"><input type="checkbox"
+                                                        style="width:16px;height:16px;accent-color:var(--accent);"></td>
+                                        <td style="text-align: center;"><input type="checkbox"
+                                                        style="width:16px;height:16px;accent-color:var(--accent);"></td>
+                                </tr>
+                                <tr>
+                                        <td class="col-label">2.3.2.1 (ab)</td>
+                                        <td>Switchboard of robust construction with a minimum IP23 rating.</td>
+                                        <td style="text-align: center;"><input type="checkbox"
+                                                        style="width:16px;height:16px;accent-color:var(--accent);"></td>
+                                        <td style="text-align: center;"><input type="checkbox"
+                                                        style="width:16px;height:16px;accent-color:var(--accent);"></td>
+                                </tr>
+                        </tbody>
+                </table>
+                <table class="cost-table" style="margin-top: 1.5rem;">
+                        <colgroup>
+                                <col style="width: 10%">
+                                <col style="width: 70%">
+                                <col style="width: 10%">
+                                <col style="width: 10%">
+                        </colgroup>
+                        <tbody>
+                                <tr>
+                                        <td class="col-label">2.3.2.1 (c)</td>
+                                        <td>Live parts are effectively protected, and a warning sign is attached along
+                                                an electric shock
+                                                symbol.</td>
+                                        <td style="text-align: center;"><input type="checkbox"
+                                                        style="width:16px;height:16px;accent-color:var(--accent);"></td>
+                                        <td style="text-align: center;"><input type="checkbox"
+                                                        style="width:16px;height:16px;accent-color:var(--accent);"></td>
+                                </tr>
+                                <tr>
+                                        <td class="col-label">2.3.2.1 (d)</td>
+                                        <td>Insulated tie bar for extension leads to prevent strain on socket/outlet
+                                        </td>
+                                        <td style="text-align: center;"><input type="checkbox"
+                                                        style="width:16px;height:16px;accent-color:var(--accent);"></td>
+                                        <td style="text-align: center;"><input type="checkbox"
+                                                        style="width:16px;height:16px;accent-color:var(--accent);"></td>
+                                </tr>
+                                <tr>
+                                        <td class="col-label">2.3.2.1 (e)</td>
+                                        <td>Switchboard door is lockable, non-removable without a tool, and fitted with
+                                                a retention device
+                                                to stay in an open position.</td>
+                                        <td style="text-align: center;"><input type="checkbox"
+                                                        style="width:16px;height:16px;accent-color:var(--accent);"></td>
+                                        <td style="text-align: center;"><input type="checkbox"
+                                                        style="width:16px;height:16px;accent-color:var(--accent);"></td>
+                                </tr>
+                                <tr>
+                                        <td class="col-label">2.3.2.1 (e)</td>
+                                        <td>Switchboard has means of safe entry of leads and label: KEEP CLOSED –RUN
+                                                LEADS THROUGH BOTTOM
+                                        </td>
+                                        <td style="text-align: center;"><input type="checkbox"
+                                                        style="width:16px;height:16px;accent-color:var(--accent);"></td>
+                                        <td style="text-align: center;"><input type="checkbox"
+                                                        style="width:16px;height:16px;accent-color:var(--accent);"></td>
+                                </tr>
+                                <tr>
+                                        <td class="col-label">2.3.3</td>
+                                        <td>Switchboard mounted on a pole, structure, wall or suitably designed
+                                                free-standing design</td>
+                                        <td style="text-align: center;"><input type="checkbox"
+                                                        style="width:16px;height:16px;accent-color:var(--accent);"></td>
+                                        <td style="text-align: center;"><input type="checkbox"
+                                                        style="width:16px;height:16px;accent-color:var(--accent);"></td>
+                                </tr>
+                        </tbody>
+                </table>
+                <table class="cost-table" style="margin-top: 1.5rem;">
+                        <colgroup>
+                                <col style="width: 10%">
+                                <col style="width: 70%">
+                                <col style="width: 10%">
+                                <col style="width: 10%">
+                        </colgroup>
+                        <tbody>
+                                <tr>
+                                        <td class="col-label">2.4.1</td>
+                                        <td>Switchboard has a main isolation switch capable of isolation all downstream
+                                                circuits</td>
+                                        <td style="text-align: center;"><input type="checkbox"
+                                                        style="width:16px;height:16px;accent-color:var(--accent);"></td>
+                                        <td style="text-align: center;"><input type="checkbox"
+                                                        style="width:16px;height:16px;accent-color:var(--accent);"></td>
+                                </tr>
+                                <tr>
+                                        <td class="col-label">2.4.2</td>
+                                        <td>Main switch capable of being locked or within a lockable space</td>
+                                        <td style="text-align: center;"><input type="checkbox"
+                                                        style="width:16px;height:16px;accent-color:var(--accent);"></td>
+                                        <td style="text-align: center;"><input type="checkbox"
+                                                        style="width:16px;height:16px;accent-color:var(--accent);"></td>
+                                </tr>
+                                <tr>
+                                        <td class="col-label">2.4.3</td>
+                                        <td>Main switch labeled appropriately: MAIN SWITCH or DISTRIBUTION BOARD
+                                                ISOLATION SWITCH or
+                                                similar.</td>
+                                        <td style="text-align: center;"><input type="checkbox"
+                                                        style="width:16px;height:16px;accent-color:var(--accent);"></td>
+                                        <td style="text-align: center;"><input type="checkbox"
+                                                        style="width:16px;height:16px;accent-color:var(--accent);"></td>
+                                </tr>
+                                <tr>
+                                        <td class="col-label">2.5.3</td>
+                                        <td>Construction wiring installed in appropriate conduit to protect against
+                                                mechanical damage.</td>
+                                        <td style="text-align: center;"><input type="checkbox"
+                                                        style="width:16px;height:16px;accent-color:var(--accent);"></td>
+                                        <td style="text-align: center;"><input type="checkbox"
+                                                        style="width:16px;height:16px;accent-color:var(--accent);"></td>
+                                </tr>
+                                <tr>
+                                        <td class="col-label">2.5.4</td>
+                                        <td>Construction wiring labeled with yellow tape with the words 'construction
+                                                wiring' at distances
+                                                not longer than 5m.</td>
+                                        <td style="text-align: center;"><input type="checkbox"
+                                                        style="width:16px;height:16px;accent-color:var(--accent);"></td>
+                                        <td style="text-align: center;"><input type="checkbox"
+                                                        style="width:16px;height:16px;accent-color:var(--accent);"></td>
+                                </tr>
+                        </tbody>
+                </table>
+                <table class="cost-table" style="margin-top: 1.5rem;">
+                        <thead>
+                                <tr>
+                                        <th style="width: 10%">Clause</th>
+                                        <th style="width: 70%">Requirement</th>
+                                        <th style="width: 10%; text-align: center;">Yes</th>
+                                        <th style="width: 10%; text-align: center;">No</th>
+                                </tr>
+                        </thead>
+                        <tbody>
+                                <tr>
+                                        <td class="col-label">2.6.9</td>
+                                        <td>Extension leads supported by stands or insulated hooks.</td>
+                                        <td style="text-align: center;"><input type="checkbox"
+                                                        style="width:16px;height:16px;accent-color:var(--accent);"></td>
+                                        <td style="text-align: center;"><input type="checkbox"
+                                                        style="width:16px;height:16px;accent-color:var(--accent);"></td>
+                                </tr>
+                                <tr>
+                                        <td class="col-label">2.7.1</td>
+                                        <td>Adequate lighting provided for safe work.</td>
+                                        <td style="text-align: center;"><input type="checkbox"
+                                                        style="width:16px;height:16px;accent-color:var(--accent);"></td>
+                                        <td style="text-align: center;"><input type="checkbox"
+                                                        style="width:16px;height:16px;accent-color:var(--accent);"></td>
+                                </tr>
+                                <tr>
+                                        <td class="col-label">2.7.2</td>
+                                        <td>Lighting is mechanically protected.</td>
+                                        <td style="text-align: center;"><input type="checkbox"
+                                                        style="width:16px;height:16px;accent-color:var(--accent);"></td>
+                                        <td style="text-align: center;"><input type="checkbox"
+                                                        style="width:16px;height:16px;accent-color:var(--accent);"></td>
+                                </tr>
+                                <tr>
+                                        <td class="col-label">2.7.3</td>
+                                        <td>Emergency lighting adequate for the safe exit of workers (if applicable).
+                                        </td>
+                                        <td style="text-align: center;"><input type="checkbox"
+                                                        style="width:16px;height:16px;accent-color:var(--accent);"></td>
+                                        <td style="text-align: center;"><input type="checkbox"
+                                                        style="width:16px;height:16px;accent-color:var(--accent);"></td>
+                                </tr>
+                                <tr>
+                                        <td class="col-label">2.8.1</td>
+                                        <td>If a lift shaft is present, the final sub-circuit feeding it is locked and
+                                                tagged to prevent
+                                                inadvertent isolation of supply.</td>
+                                        <td style="text-align: center;"><input type="checkbox"
+                                                        style="width:16px;height:16px;accent-color:var(--accent);"></td>
+                                        <td style="text-align: center;"><input type="checkbox"
+                                                        style="width:16px;height:16px;accent-color:var(--accent);"></td>
+                                </tr>
+                        </tbody>
+                </table>
+                <table class="cost-table" style="margin-top: 1.5rem;">
+                        <colgroup>
+                                <col style="width: 10%">
+                                <col style="width: 70%">
+                                <col style="width: 10%">
+                                <col style="width: 10%">
+                        </colgroup>
+                        <tbody>
+                                <tr>
+                                        <td class="col-label">2.9</td>
+                                        <td>Socket outlets in site sheds and other transportable structures are RCD
+                                                protected.</td>
+                                        <td style="text-align: center;"><input type="checkbox"
+                                                        style="width:16px;height:16px;accent-color:var(--accent);"></td>
+                                        <td style="text-align: center;"><input type="checkbox"
+                                                        style="width:16px;height:16px;accent-color:var(--accent);"></td>
+                                </tr>
+                                <tr>
+                                        <td class="col-label">3.8.3</td>
+                                        <td>Portable equipment, including power leads, is inspected at three-monthly
+                                                intervals.</td>
+                                        <td style="text-align: center;"><input type="checkbox"
+                                                        style="width:16px;height:16px;accent-color:var(--accent);"></td>
+                                        <td style="text-align: center;"><input type="checkbox"
+                                                        style="width:16px;height:16px;accent-color:var(--accent);"></td>
+                                </tr>
+                                <tr>
+                                        <td class="col-label">3.8.3</td>
+                                        <td>Portable RCD's trip time is tested every 3 months.</td>
+                                        <td style="text-align: center;"><input type="checkbox"
+                                                        style="width:16px;height:16px;accent-color:var(--accent);"></td>
+                                        <td style="text-align: center;"><input type="checkbox"
+                                                        style="width:16px;height:16px;accent-color:var(--accent);"></td>
+                                </tr>
+                                <tr>
+                                        <td class="col-label">3.8.3</td>
+                                        <td>Switchboards, wiring, and site sheds are inspected at six-monthly intervals.
+                                        </td>
+                                        <td style="text-align: center;"><input type="checkbox"
+                                                        style="width:16px;height:16px;accent-color:var(--accent);"></td>
+                                        <td style="text-align: center;"><input type="checkbox"
+                                                        style="width:16px;height:16px;accent-color:var(--accent);"></td>
+                                </tr>
+                                <tr>
+                                        <td class="col-label">3.10</td>
+                                        <td>Register available for equipment and includes records of testing and
+                                                tagging. RCD trip time
+                                                results and list of repaired equipment.</td>
+                                        <td style="text-align: center;"><input type="checkbox"
+                                                        style="width:16px;height:16px;accent-color:var(--accent);"></td>
+                                        <td style="text-align: center;"><input type="checkbox"
+                                                        style="width:16px;height:16px;accent-color:var(--accent);"></td>
+                                </tr>
+                        </tbody>
+                </table>
+        </div>
+
+        <div class="section">
+                <table class="cost-table">
+                        <thead>
+                                <tr>
+                                        <th style="width: 20%">Action No.</th>
+                                        <th style="width: 80%">Action Required</th>
+                                </tr>
+                        </thead>
+                        <tbody>
+                                <tr>
+                                        <td><input type="text"></td>
+                                        <td><input type="text"></td>
+                                </tr>
+                                <tr>
+                                        <td><input type="text"></td>
+                                        <td><input type="text"></td>
+                                </tr>
+                                <tr>
+                                        <td><input type="text"></td>
+                                        <td><input type="text"></td>
+                                </tr>
+                                <tr>
+                                        <td><input type="text"></td>
+                                        <td><input type="text"></td>
+                                </tr>
+                                <tr>
+                                        <td><input type="text"></td>
+                                        <td><input type="text"></td>
+                                </tr>
+                                <tr>
+                                        <td><input type="text"></td>
+                                        <td><input type="text"></td>
+                                </tr>
+                                <tr>
+                                        <td><input type="text"></td>
+                                        <td><input type="text"></td>
+                                </tr>
+                                <tr>
+                                        <td><input type="text"></td>
+                                        <td><input type="text"></td>
+                                </tr>
+                                <tr>
+                                        <td><input type="text"></td>
+                                        <td><input type="text"></td>
+                                </tr>
+                        </tbody>
+                </table>
+        </div>
+
+        <div class="section">
+                <table class="cost-table">
+                        <thead>
+                                <tr>
+                                        <th style="width: 33%">Re-inspection Date</th>
+                                        <th style="width: 33%">Re-inspection Completed By</th>
+                                        <th style="width: 34%">Compliance Date</th>
+                                </tr>
+                        </thead>
+                        <tbody>
+                                <tr>
+                                        <td><input type="text"></td>
+                                        <td><input type="text"></td>
+                                        <td><input type="text"></td>
+                                </tr>
+                        </tbody>
+                </table>
+        </div>
+
+        <div class="section" style="border: none; padding-top: 1rem; font-size: 13px; color: var(--ink3);">
+                Not just inspection ZenElectrical can help you streamline your business even more, <a
+                        href="https://www.zentrades.pro"
+                        style="color: var(--accent); font-weight: 600; text-decoration: underline;">Book a demo to know
+                        more</a>
+        </div>
+
+</div>
+
+<!-- Download Button and Script -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<button id="downloadPdfBtn"
+        style="position: fixed; bottom: 20px; right: 20px; background: var(--accent); color: white; border: none; padding: 12px 24px; border-radius: 8px; font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 14px; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 1000; transition: opacity 0.2s;">
+        Download as PDF
+</button>
+
+<script>
+        document.getElementById('downloadPdfBtn').addEventListener('click', function () {
+                var btn = this;
+                var originalText = btn.innerText;
+                btn.innerText = 'Generating High Quality PDF...';
+                btn.style.opacity = '0.7';
+
+                btn.style.display = 'none';
+
+                var element = document.querySelector('.doc');
+
+                window.scrollTo(0, 0);
+                var opt = {
+                        margin: [10, 0, 10, 0],
+                        filename: 'ZenTrades_Building_Proposal.pdf',
+                        image: { type: 'jpeg', quality: 1.0 },
+                        html2canvas: { scale: 4, useCORS: true, letterRendering: true, scrollY: 0 },
+                        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+                        pagebreak: { mode: ['css', 'legacy'], avoid: ['tr', '.tier-card', '.legal'] }
+                };
+
+                html2pdf().set(opt).from(element).save().then(function () {
+                        btn.style.display = 'block';
+                        btn.innerText = originalText;
+                        btn.style.opacity = '1';
+                }).catch(function (err) {
+                        console.error(err);
+                        btn.style.display = 'block';
+                        btn.innerText = 'Error!';
+                        setTimeout(() => { btn.innerText = originalText; btn.style.opacity = '1'; }, 2000);
+                });
+        });
+</script>
