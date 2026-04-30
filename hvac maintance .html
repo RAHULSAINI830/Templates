@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checklist Template</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@600&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        :root {
+            --ink: #000000;
+            --ink2: #333333;
+            --ink3: #666666;
+            --surface: #ffffff;
+            --surface2: #f9f9f9;
+            --surface3: #f0f0f8;
+            --accent: #ee5566;
+            --accent2: #ff7788;
+            --border: rgba(0, 0, 0, 0.1);
+            --border2: rgba(0, 0, 0, 0.06);
+            --radius: 10px;
+            --radiusLg: 16px;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            color: var(--ink);
+            background: var(--surface3);
+            padding: 20px 0;
+        }
+
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto 20px auto;
+            background: var(--surface);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+            display: block;
+            overflow: hidden;
+        }
+
+        .page-content {}
+
+        .header {
+            background: var(--ink);
+            padding: 2.5rem 3rem;
+            position: relative;
+            overflow: hidden
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -40px;
+            right: -40px;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: var(--accent);
+            opacity: 0.12
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -60px;
+            right: 60px;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: #fff;
+            opacity: 0.04
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            z-index: 1
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px
+        }
+
+        .doc-title {
+            color: #fff;
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 600;
+            line-height: 1.2
+        }
+
+        .doc-subtitle {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 12px;
+            margin-top: 4px;
+            letter-spacing: 0.8px;
+            text-transform: uppercase
+        }
+
+        .accent-bar {
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent) 0%, var(--accent2) 50%, transparent 100%)
+        }
+
+        .section {
+            padding: 2rem 3rem;
+            border-bottom: 1px solid var(--border2)
+        }
+
+        .section:last-child {
+            border-bottom: none
+        }
+
+        .sec-label {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--ink);
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+            padding-bottom: 4px;
+            margin-bottom: 1.2rem;
+        }
+
+        .sec-label-lg {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--ink);
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+            padding-bottom: 4px;
+            margin-bottom: 1.2rem;
+        }
+
+        .field-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px 40px
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            margin-bottom: 12px;
+        }
+
+        .field label {
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            color: var(--ink3);
+            text-transform: uppercase;
+        }
+
+        .field-line {
+            height: 40px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--surface2);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            color: var(--ink);
+            outline: none;
+            width: 100%;
+            padding: 0 12px;
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        .field-line:focus {
+            border-color: var(--accent);
+            background: #fff;
+        }
+
+        .check-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-bottom: 2.5rem;
+            background: #fff;
+            border-radius: var(--radiusLg);
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .check-table th {
+            background: var(--ink);
+            color: #fff;
+            vertical-align: top;
+            border-bottom: 1px solid var(--border);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 14px 18px;
+            text-align: left;
+        }
+
+        .check-table th:last-child {
+            border-right: none;
+        }
+
+        .check-table td {
+            padding: 14px 18px;
+            text-align: left;
+            vertical-align: middle;
+            border-bottom: 1px solid var(--border);
+            border-right: 1px solid var(--border);
+        }
+
+        .check-table td:last-child {
+            border-right: none;
+        }
+
+        .check-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .item-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 4px;
+        }
+
+        .item-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        .notes-header {
+            font-size: 16px;
+            font-weight: 700;
+            vertical-align: middle !important;
+            text-align: left;
+        }
+
+        .check-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .check-row input[type="checkbox"] {
+            margin-top: 2px;
+            width: 16px;
+            height: 16px;
+            accent-color: var(--accent);
+            cursor: pointer;
+        }
+
+        .check-text {
+            font-size: 15px;
+            line-height: 1.4;
+            font-weight: 500;
+        }
+
+        .measurement-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2.5rem;
+            gap: 2rem;
+            width: 100%;
+        }
+
+        .measurement-field {
+            display: flex;
+            align-items: flex-end;
+            flex: 1;
+            color: #cccccc00;
+        }
+
+        .measurement-field label {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--ink);
+            white-space: nowrap;
+            margin-right: 12px;
+        }
+
+        .measurement-input {
+            flex: 1;
+            border: none;
+            border-bottom: 1px solid var(--ink);
+            background: transparent;
+            outline: none;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 16px;
+            padding: 2px 4px;
+        }
+
+
+        .section-title {
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase;
+        }
+
+        .sub-section-title {
+            font-size: 20px;
+            font-weight: 700;
+            text-decoration: underline;
+            margin-bottom: 1.5rem;
+        }
+
+        @media print {
+            body {
+                background: #fff;
+                padding: 0;
+            }
+
+            .page {
+                box-shadow: none;
+                margin: 0;
+                width: 210mm;
+                height: 297mm;
+                page-break-after: always;
+            }
+
+            input {
+                border-color: #ccc !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="pages-container">
+        <!-- PAGE 1 -->
+        <div class="page">
+            <div class="page-content">
+                <div class="header">
+                    <div class="header-inner">
+                        <div class="brand">
+                            <img src="data:image/png;base64,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"
+                                alt="ZenTrades" style="height: 28px; width: auto;">
+                        </div>
+                        <div style="text-align:right">
+                            <div class="doc-title"> HVAC Maintenance</div>
+                            <div class="doc-subtitle">Template</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accent-bar"></div>
+
+                <div class="section" style="padding-bottom: 2rem;">
+                    <h2 class="section-title" style="margin-bottom: 1.5rem;">GENERAL INFORMATION</h2>
+                    <div class="field-grid">
+                        <div class="field">
+                            <label>Date:</label>
+                            <input class="field-line" type="text">
+                        </div>
+                        <div class="field">
+                            <label>Voltage of Unit:</label>
+                            <input class="field-line" type="text">
+                        </div>
+                        <div class="field">
+                            <label>Phase of Unit:</label>
+                            <input class="field-line" type="text">
+                        </div>
+                        <div class="field">
+                            <label>Location of Unit:</label>
+                            <input class="field-line" type="text">
+                        </div>
+                        <div class="field">
+                            <label>Type of Refrigerant:</label>
+                            <input class="field-line" type="text">
+                        </div>
+                        <div class="field">
+                            <label>Serial/Model # of unit:</label>
+                            <input class="field-line" type="text">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section" style="padding-bottom: 2rem;">
+                    <h2 class="section-title" style="margin-bottom: 1.5rem;">SAFETY</h2>
+                    <div style="display: flex; flex-direction: column; gap: 15px;">
+                        <div class="check-row">
+                            <input type="checkbox">
+                            <div class="check-text">The disconnect switch is off</div>
+                        </div>
+                        <div class="check-row">
+                            <input type="checkbox">
+                            <div class="check-text">The area around the unit is cleared of any debris or hazards</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section" style="border-bottom: none;">
+                    <h2 class="section-title" style="margin-bottom: 0.5rem;">A/C</h2>
+                    <p style="font-size: 16px; font-weight: 600; margin-bottom: 2rem; color: var(--ink);">The following
+                        was inspected</p>
+
+                    <h2 class="section-title" style="margin-bottom: 1.5rem;">BLOWER AREA</h2>
+                    <div style="display: flex; flex-direction: column; gap: 15px;">
+                        <div class="check-row">
+                            <input type="checkbox">
+                            <div class="check-text">Belt tension, motor, bearings, wiring, blower wheel</div>
+                        </div>
+                        <div class="field"
+                            style="margin-bottom: 0; margin-top: 10px; margin-left: 28px; width: calc(100% - 28px);">
+                            <label>Document belt(s) size #:</label>
+                            <input class="field-line" type="text" style="width: 100%;">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- PAGE 2 -->
+        <div class="page">
+            <style>
+                .tab-check {
+                    appearance: none;
+                    -webkit-appearance: none;
+                    width: 22px;
+                    height: 22px;
+                    border: 2px solid #666;
+                    border-radius: 2px;
+                    cursor: pointer;
+                    margin: 0;
+                    display: inline-block;
+                    vertical-align: middle;
+                }
+
+                .tab-check:checked {
+                    background-color: #f15c6d;
+                    border-color: #f15c6d;
+                }
+
+                .tab-check:checked::after {
+                    content: "✔";
+                    color: white;
+                    font-size: 14px;
+                    font-weight: bold;
+                    display: block;
+                    text-align: center;
+                    line-height: 20px;
+                }
+            </style>
+            <div class="page-content" style="padding: 2.5rem 3rem;">
+
+                <!-- A/C TABLE -->
+                <table class="check-table">
+                    <thead>
+                        <tr>
+                            <th colspan="3">
+                                <div class="item-title" style="color: #f15c6d;">A/C</div>
+                                <div class="item-label">The following was inspected</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- FILTER AREA -->
+                        <tr>
+                            <td rowspan="5"
+                                style="width: 30%; font-weight: 700; background: var(--surface3); vertical-align: middle; color: var(--ink);">
+                                FILTER AREA</td>
+                            <td style="font-weight: 500;">Air Filters</td>
+                            <td style="width: 80px; text-align: center; vertical-align: middle;"><input type="checkbox"
+                                    class="tab-check"></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 500;">Check if changed</td>
+                            <td style="text-align: center; vertical-align: middle;"><input type="checkbox"
+                                    class="tab-check"></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 500;">Economizer Screen</td>
+                            <td style="text-align: center; vertical-align: middle;"><input type="checkbox"
+                                    class="tab-check"></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 500;">Check if cleaned</td>
+                            <td style="text-align: center; vertical-align: middle;"><input type="checkbox"
+                                    class="tab-check"></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 500;">Evaporating Coil</td>
+                            <td style="text-align: center; vertical-align: middle;"><input type="checkbox"
+                                    class="tab-check"></td>
+                        </tr>
+
+                        <!-- COOLING AREA -->
+                        <tr>
+                            <td rowspan="4"
+                                style="width: 30%; font-weight: 700; background: var(--surface3); vertical-align: middle; color: var(--ink);">
+                                COOLING AREA</td>
+                            <td style="font-weight: 500;">Drain Trap</td>
+                            <td style="text-align: center; vertical-align: middle;"><input type="checkbox"
+                                    class="tab-check"></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 500;">Check if flushed out</td>
+                            <td style="text-align: center; vertical-align: middle;"><input type="checkbox"
+                                    class="tab-check"></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 500;">Thermostat Controls</td>
+                            <td style="text-align: center; vertical-align: middle;"><input type="checkbox"
+                                    class="tab-check"></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 500;">Electrical Connections</td>
+                            <td style="text-align: center; vertical-align: middle;"><input type="checkbox"
+                                    class="tab-check"></td>
+                        </tr>
+
+                        <!-- CONDENSER/COMPRESSOR AREA -->
+                        <tr>
+                            <td rowspan="5"
+                                style="width: 30%; font-weight: 700; background: var(--surface3); vertical-align: middle; color: var(--ink);">
+                                CONDENSER/COMPRESSOR AREA</td>
+                            <td style="font-weight: 500;">Condenser fan motor</td>
+                            <td style="text-align: center; vertical-align: middle;"><input type="checkbox"
+                                    class="tab-check"></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 500;">Blades</td>
+                            <td style="text-align: center; vertical-align: middle;"><input type="checkbox"
+                                    class="tab-check"></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 500;">Condenser Coil</td>
+                            <td style="text-align: center; vertical-align: middle;"><input type="checkbox"
+                                    class="tab-check"></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 500;">Filter Dryer</td>
+                            <td style="text-align: center; vertical-align: middle;"><input type="checkbox"
+                                    class="tab-check"></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 500;">Crankcase (may be hot to touch)</td>
+                            <td style="text-align: center; vertical-align: middle;"><input type="checkbox"
+                                    class="tab-check"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- PAGE 3 -->
+        <div class="page">
+            <div class="page-content" style="padding: 2.5rem 3rem;">
+
+                <!-- HEATING TABLE -->
+                <table class="check-table">
+                    <thead>
+                        <tr>
+                            <th colspan="3">
+                                <div class="item-title" style="color: #f15c6d;">HEATING</div>
+                                <div class="item-label">The following was inspected</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- EXCHANGE AREA -->
+                        <tr>
+                            <td rowspan="3"
+                                style="width: 30%; font-weight: 700; background: var(--surface3); vertical-align: middle; color: var(--ink);">
+                                EXCHANGE AREA</td>
+                            <td style="font-weight: 500;">Air Filters</td>
+                            <td style="width: 80px; text-align: center; vertical-align: middle;"><input type="checkbox"
+                                    class="tab-check"></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 500;">Heat Exchangers</td>
+                            <td style="text-align: center; vertical-align: middle;"><input type="checkbox"
+                                    class="tab-check"></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 500;">Fan, blower motor, burner assembly</td>
+                            <td style="text-align: center; vertical-align: middle;"><input type="checkbox"
+                                    class="tab-check"></td>
+                        </tr>
+
+                        <!-- IGNITION AREA -->
+                        <tr>
+                            <td rowspan="6"
+                                style="width: 30%; font-weight: 700; background: var(--surface3); vertical-align: middle; color: var(--ink);">
+                                IGNITION AREA</td>
+                            <td style="font-weight: 500;">Gas pipe and valve</td>
+                            <td style="text-align: center; vertical-align: middle;"><input type="checkbox"
+                                    class="tab-check"></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 500;">Draft induce motor</td>
+                            <td style="text-align: center; vertical-align: middle;"><input type="checkbox"
+                                    class="tab-check"></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 500;">Burner logs</td>
+                            <td style="text-align: center; vertical-align: middle;"><input type="checkbox"
+                                    class="tab-check"></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 500;">Ignition board</td>
+                            <td style="text-align: center; vertical-align: middle;"><input type="checkbox"
+                                    class="tab-check"></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 500;">Thermostat controls</td>
+                            <td style="text-align: center; vertical-align: middle;"><input type="checkbox"
+                                    class="tab-check"></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 500;">Electrical Connections</td>
+                            <td style="text-align: center; vertical-align: middle;"><input type="checkbox"
+                                    class="tab-check"></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- NOTES TABLE -->
+                <table class="check-table">
+                    <tbody>
+                        <tr>
+                            <td class="notes-header"
+                                style="width: 15%; background: var(--surface3); text-align: center; color: #f15c6d;">
+                                NOTES:</td>
+                            <td style="vertical-align: middle;">
+                                <div style="display: flex; flex-direction: column; gap: 10px;">
+                                    <input class="field-line"
+                                        style="height: 28px; border:none; border-bottom: 2px dotted #aaa; border-radius:0; background:transparent;"
+                                        type="text">
+                                    <input class="field-line"
+                                        style="height: 28px; border:none; border-bottom: 2px dotted #aaa; border-radius:0; background:transparent;"
+                                        type="text">
+                                    <input class="field-line"
+                                        style="height: 28px; border:none; border-bottom: 2px dotted #aaa; border-radius:0; background:transparent;"
+                                        type="text">
+                                    <input class="field-line"
+                                        style="height: 28px; border:none; border-bottom: 2px dotted #aaa; border-radius:0; background:transparent;"
+                                        type="text">
+                                    <input class="field-line"
+                                        style="height: 28px; border:none; border-bottom: 2px dotted #aaa; border-radius:0; background:transparent;"
+                                        type="text">
+                                    <input class="field-line"
+                                        style="height: 28px; border:none; border-bottom: 2px dotted #aaa; border-radius:0; background:transparent;"
+                                        type="text">
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 2 -->
+    <div class="page">
+        <style>
+            .tab-check {
+                appearance: none;
+                -webkit-appearance: none;
+                width: 22px;
+                height: 22px;
+                border: 2px solid #666;
+                border-radius: 2px;
+                cursor: pointer;
+                margin: 0;
+                display: inline-block;
+                vertical-align: middle;
+            }
+
+            .tab-check:checked {
+                background-color: #f15c6d;
+                border-color: #f15c6d;
+            }
+
+            .tab-check:checked::after {
+                content: '✔';
+                color: white;
+                font-size: 14px;
+                font-weight: bold;
+                display: block;
+                text-align: center;
+                line-height: 20px;
+            }
+        </style>
+        <div class="page-content" style="padding: 2.5rem 3rem;">
+
+            <!-- A/C TABLE (Part 2) -->
+            <table class="check-table">
+                <thead>
+                    <tr>
+                        <th colspan="3">
+                            <div class="item-title" style="color: #f15c6d;">A/C (Continued)</div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- CONDENSER/COMPRESSOR AREA -->
+                    <tr>
+                        <td rowspan="5"
+                            style="width: 30%; font-weight: 700; background: var(--surface3); vertical-align: middle; color: var(--ink);">
+                            CONDENSER/COMPRESSOR AREA</td>
+                        <td style="font-weight: 500;">Condenser fan motor</td>
+                        <td style="width: 80px; text-align: center; vertical-align: middle;"><input type="checkbox"
+                                class="tab-check"></td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 500;">Blades</td>
+                        <td style="text-align: center; vertical-align: middle;"><input type="checkbox"
+                                class="tab-check"></td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 500;">Condenser Coil</td>
+                        <td style="text-align: center; vertical-align: middle;"><input type="checkbox"
+                                class="tab-check"></td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 500;">Filter Dryer</td>
+                        <td style="text-align: center; vertical-align: middle;"><input type="checkbox"
+                                class="tab-check"></td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 500;">Crankcase (may be hot to touch)</td>
+                        <td style="text-align: center; vertical-align: middle;"><input type="checkbox"
+                                class="tab-check"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- HEATING TABLE -->
+            <table class="check-table">
+                <thead>
+                    <tr>
+                        <th colspan="3">
+                            <div class="item-title" style="color: #f15c6d;">HEATING</div>
+                            <div class="item-label">The following was inspected</div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- EXCHANGE AREA -->
+                    <tr>
+                        <td rowspan="3"
+                            style="width: 30%; font-weight: 700; background: var(--surface3); vertical-align: middle; color: var(--ink);">
+                            EXCHANGE AREA</td>
+                        <td style="font-weight: 500;">Air Filters</td>
+                        <td style="width: 80px; text-align: center; vertical-align: middle;"><input type="checkbox"
+                                class="tab-check"></td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 500;">Heat Exchangers</td>
+                        <td style="text-align: center; vertical-align: middle;"><input type="checkbox"
+                                class="tab-check"></td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 500;">Fan, blower motor, burner assembly</td>
+                        <td style="text-align: center; vertical-align: middle;"><input type="checkbox"
+                                class="tab-check"></td>
+                    </tr>
+
+                    <!-- IGNITION AREA -->
+                    <tr>
+                        <td rowspan="6"
+                            style="width: 30%; font-weight: 700; background: var(--surface3); vertical-align: middle; color: var(--ink);">
+                            IGNITION AREA</td>
+                        <td style="font-weight: 500;">Gas pipe and valve</td>
+                        <td style="text-align: center; vertical-align: middle;"><input type="checkbox"
+                                class="tab-check"></td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 500;">Draft induce motor</td>
+                        <td style="text-align: center; vertical-align: middle;"><input type="checkbox"
+                                class="tab-check"></td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 500;">Burner logs</td>
+                        <td style="text-align: center; vertical-align: middle;"><input type="checkbox"
+                                class="tab-check"></td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 500;">Ignition board</td>
+                        <td style="text-align: center; vertical-align: middle;"><input type="checkbox"
+                                class="tab-check"></td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 500;">Thermostat controls</td>
+                        <td style="text-align: center; vertical-align: middle;"><input type="checkbox"
+                                class="tab-check"></td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 500;">Electrical Connections</td>
+                        <td style="text-align: center; vertical-align: middle;"><input type="checkbox"
+                                class="tab-check"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- NOTES TABLE -->
+            <table class="check-table">
+                <tbody>
+                    <tr>
+                        <td class="notes-header"
+                            style="width: 15%; background: var(--surface3); text-align: center; color: #f15c6d;">NOTES:
+                        </td>
+                        <td style="vertical-align: middle;">
+                            <div style="display: flex; flex-direction: column; gap: 10px;">
+                                <input class="field-line"
+                                    style="height: 28px; border:none; border-bottom: 2px dotted #aaa; border-radius:0; background:transparent;"
+                                    type="text">
+                                <input class="field-line"
+                                    style="height: 28px; border:none; border-bottom: 2px dotted #aaa; border-radius:0; background:transparent;"
+                                    type="text">
+                                <input class="field-line"
+                                    style="height: 28px; border:none; border-bottom: 2px dotted #aaa; border-radius:0; background:transparent;"
+                                    type="text">
+                                <input class="field-line"
+                                    style="height: 28px; border:none; border-bottom: 2px dotted #aaa; border-radius:0; background:transparent;"
+                                    type="text">
+                                <input class="field-line"
+                                    style="height: 28px; border:none; border-bottom: 2px dotted #aaa; border-radius:0; background:transparent;"
+                                    type="text">
+                                <input class="field-line"
+                                    style="height: 28px; border:none; border-bottom: 2px dotted #aaa; border-radius:0; background:transparent;"
+                                    type="text">
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+    </div>
+
+    <!-- Download Button and Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <button id="downloadPdfBtn"
+        style="position: fixed; bottom: 20px; right: 20px; background: var(--accent); color: white; border: none; padding: 12px 24px; border-radius: 8px; font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 14px; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 1000; transition: opacity 0.2s;">
+        Download as PDF
+    </button>
+
+    <script>
+        document.getElementById('downloadPdfBtn').addEventListener('click', function () {
+            var btn = this;
+            var originalText = btn.innerText;
+            btn.innerText = 'Generating High Quality PDF...';
+            btn.style.opacity = '0.7';
+
+            btn.style.display = 'none';
+
+            var pages = document.querySelectorAll('.page');
+
+            // Prepare pages for exact A4 rendering
+            pages.forEach(function (p) {
+                p.style.margin = '0';
+                p.style.boxShadow = 'none';
+                p.style.height = '297mm';
+                p.style.transform = 'scale(1)';
+            });
+
+            window.scrollTo(0, 0);
+
+            var opt = {
+                margin: 0,
+                filename: 'ZenTrades_Checklist.pdf',
+                image: { type: 'jpeg', quality: 1.0 },
+                html2canvas: { scale: 2, useCORS: true, letterRendering: true, scrollY: 0 },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            // Start worker with the first page
+            var worker = html2pdf().set(opt).from(pages[0]).toPdf();
+
+            // Chain the remaining pages to the same PDF
+            for (let i = 1; i < pages.length; i++) {
+                worker = worker.get('pdf').then(function (pdf) {
+                    pdf.addPage();
+                }).from(pages[i]).toContainer().toCanvas().toPdf();
+            }
+
+            // Save the finalized PDF
+            worker.save().then(function () {
+                btn.style.display = 'block';
+                btn.innerText = originalText;
+                btn.style.opacity = '1';
+
+                // Restore screen layout
+                pages.forEach(function (p) {
+                    p.style.margin = '';
+                    p.style.boxShadow = '';
+                    p.style.height = '';
+                    p.style.transform = '';
+                });
+            }).catch(function (err) {
+                console.error(err);
+                btn.style.display = 'block';
+                btn.innerText = 'Error!';
+                setTimeout(() => { btn.innerText = originalText; btn.style.opacity = '1'; }, 2000);
+            });
+        });
+    </script>
+</body>
+
+</html>
